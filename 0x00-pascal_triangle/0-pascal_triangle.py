@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
-from typing import List
-
-def pascal_triangle(n: int) -> List[List[int]]:
+def pascal_triangle(n: int) -> list:
     """
     Generate Pascal's triangle up to n rows.
     """
@@ -10,12 +8,10 @@ def pascal_triangle(n: int) -> List[List[int]]:
 
     triangle = [[1]]
 
-    for _ in range(1, n):
-        row = [1]
+    while len(triangle) < n:
         last_row = triangle[-1]
-        for j in range(len(last_row) - 1):
-            row.append(last_row[j] + last_row[j + 1])
-        row.append(1)
-        triangle.append(row)
+        # Using a list comprehension to generate the next row
+        next_row = [1] + [last_row[i] + last_row[i+1] for i in range(len(last_row) - 1)] + [1]
+        triangle.append(next_row)
 
     return triangle
